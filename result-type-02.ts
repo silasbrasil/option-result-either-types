@@ -2,14 +2,14 @@ export type Result<T, E extends Error> = Ok<T, E> | Err<T, E>;
 
 interface Ok<T, E extends Error> {
   value: T,
-  isOk: (this: Result<T, E>) => this is Ok<T, E>,
-  isErr: (this: Result<T, E>) => this is Err<T, E>,
+  isOk: () => this is Ok<T, E>,
+  isErr: () => this is Err<T, E>,
 }
 
 interface Err<T, E extends Error> {
   error: E,
-  isOk: (this: Result<T, E>) => this is Ok<T, E>,
-  isErr: (this: Result<T, E>) => this is Err<T, E>,
+  isOk: () => this is Ok<T, E>,
+  isErr: () => this is Err<T, E>,
 }
 
 export function ok<T, E extends Error>(value: T): Result<T, E> {
